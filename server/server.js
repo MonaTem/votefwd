@@ -148,13 +148,11 @@ router.route('/voters/downloadLetter')
     });
   });
 
-// Keep /downloadAllLetters route so that after deployment
-//   people who don't refresh their browser won't get
-//   errors.
-router.route('/voters/downloadAllLetters')
-  .get(checkJwt, function(req, res) {
-    voterService.downloadAllLetters(req.user.sub, downloadFileCallback(res));
+router.route('/voters/downloadAllLettersForUser')
+  .get(checkJwt, checkAdmin, function(req, res) {
+    voterService.downloadAllLetters(req.query.user_id, downloadFileCallback(res));
   });
+
 /**
  * If the JWT contains a "voterId" value, then this is a letter to a single voter.
  * Otherwise it's a letter to all voters for that user.

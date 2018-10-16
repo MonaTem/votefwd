@@ -91,7 +91,7 @@ class AdminUser extends Component {
     axios({
      method: 'GET',
       headers: {Authorization: 'Bearer '.concat(localStorage.getItem('access_token'))},
-      url: `${process.env.REACT_APP_API_URL}/voters/downloadAllLetters`,
+      url: `${process.env.REACT_APP_API_URL}/voters/downloadAllLettersForUser`,
       params: { user_id: auth0_id },
       responseType: "blob"
     })
